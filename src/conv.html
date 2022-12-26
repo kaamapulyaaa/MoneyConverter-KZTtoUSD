@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<div id = "box">
+    
+    <form id='convcurrency' @submit="conversion">
+        <h1>Конвертер валют</h1>
+        <P>
+            <h3>Введите сумму для перевода</h3>
+        </P>
+        <select v-model="selected">
+            <option v-for="option in options" v-bind:value="option.value">
+                Из {{ option.text }}
+            </option>
+        </select>
+
+</div>
+    <script src = "convcurrency.js" ></script>
+</body>
+</html>
