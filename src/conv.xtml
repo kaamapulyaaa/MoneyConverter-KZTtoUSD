@@ -11,3 +11,17 @@
                 Из {{ option.text }}
             </option>
         </select>
+
+        <input id="amount" v-model="amount" name="amount" type="number" min="0">
+
+        <select v-model="selected2">
+            <option v-for="option in options2" v-bind:value="option.value">
+                В {{ option.text }}
+            </option>
+        </select>
+
+        <p>{{ result }}</p>
+        <p>
+            <input type="submit" value="Выполнить" class="btn">
+        </p>
+    </form>
