@@ -63,3 +63,35 @@
     
 </head>
 <body>
+
+<div id = "box">
+    
+    <form id='convcurrency' @submit="conversion">
+        <h1>Конвертер валют</h1>
+        <P>
+            <h3>Введите сумму для перевода</h3>
+        </P>
+        <select v-model="selected">
+            <option v-for="option in options" v-bind:value="option.value">
+                Из {{ option.text }}
+            </option>
+        </select>
+
+        <input id="amount" v-model="amount" name="amount" type="number" min="0">
+
+        <select v-model="selected2">
+            <option v-for="option in options2" v-bind:value="option.value">
+                В {{ option.text }}
+            </option>
+        </select>
+
+        <p>{{ result }}</p>
+        <p>
+            <input type="submit" value="Выполнить" class="btn">
+        </p>
+    </form>
+
+</div>
+    <script src = "convcurrency.js" ></script>
+</body>
+</html>
