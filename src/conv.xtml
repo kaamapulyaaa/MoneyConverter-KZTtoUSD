@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <form id='convCurrency' @submit="conversion">
+<form id='convcurrency' @submit="conversion">
         <h1>Конвертер валют</h1>
         <P>
             <h3>Введите сумму для перевода</h3>
