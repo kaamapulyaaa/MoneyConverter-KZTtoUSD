@@ -1,5 +1,5 @@
 const convCurrency = new Vue({
-    el: '#convcurrency',
+    el: '#convCurrency',
     data: {
         selected: 'USD',
         options: [
@@ -18,6 +18,7 @@ const convCurrency = new Vue({
         amount: null,
         result: null
     },
+
 
     methods: {
         conversion: function(event) {
