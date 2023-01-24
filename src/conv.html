@@ -1,97 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<HTML>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Конвертер валют</title>
-
-    <style>
-            #box 
-            {
-                width:447px;
-                height: 500px;
-                margin: 0px auto;
-                background-color: #cccccc;
-                border-radius: 1rem;
-            }
-            h1{
-                text-align: center;
-                background-color: #990000;
-                border-radius: 1rem;
-            }
-            h3{
-                text-align: center;
-                text-shadow: 1px 1px 1px black;
-            }
-            body{
-                background-color: #fff;
-                font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                color: #fff; 
-            }
-            p{
-                text-align: center;
-                font-weight: bold;
-                font-size: 1.75rem;
-                text-shadow: 1px 1px 1px black;
-            }
-            input{
-                text-align: center;
-                border-radius: 0.5rem;
-                font-size: 1.25rem;
-            }
-            option{
-                font-weight: bold;
-                font-size: 1.2rem;
-            }
-            select{
-                text-align: center;
-                font-weight: bold;
-                font-size: 1.25rem;
-            }
-            .btn{
-                font-size: x-large;
-                font-weight: bold;
-                border-radius: 1rem;
-                background-color: #fff;
-                color:black;
-            }
-        </style>
-
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    
+   <title>Currency Converter KZT to USD, RUB</title>
 </head>
 <body>
-
-<div id = "box">
-    
-    <form id='convcurrency' @submit="conversion">
-        <h1>Конвертер валют</h1>
-        <P>
-            <h3>Введите сумму для перевода</h3>
-        </P>
-        <select v-model="selected">
-            <option v-for="option in options" v-bind:value="option.value">
-                Из {{ option.text }}
-            </option>
-        </select>
-
-        <input id="amount" v-model="amount" name="amount" type="number" min="0">
-
-        <select v-model="selected2">
-            <option v-for="option in options2" v-bind:value="option.value">
-                В {{ option.text }}
-            </option>
-        </select>
-
-        <p>{{ result }}</p>
-        <p>
-            <input type="submit" value="Выполнить" class="btn">
-        </p>
-    </form>
-
-</div>
-    <script src = "convcurrency.js" ></script>
+   <h1>Currency Converter</h1>
+   <p> Select Currency and enter Amount to convert.</p>
+   <form>
+      <label>From:</label>
+      <select id="from">
+         <option value="USD">USD</option>
+         <option value="EUR">EUR</option>
+         <option value="GBP">KZT</option>
+         <option value="INR">RUB</option>
+      </select>
+      <label>To:</label>
+      <select id="to">
+         <option value="USD">USD</option>
+         <option value="EUR">EUR</option>
+         <option value="GBP">KZT</option>
+         <option value="INR">RUB</option>
+      </select>
+      <label>Amount:</label>
+      <input type="text" id="amount" />
+      <button type="button" id="convert">Convert</button>
+      <p id="result"></p>
+   </form>
+   <script>
+      const convert = document.getElementById("convert");
+      const result = document.getElementById("result");
+      const from = document.getElementById("from");
+      const to = document.getElementById("to");
+      const amount = document.getElementById("amount");
+      convert.addEventListener("click", function() {
+         let fromCurrency = from.value;
+         let toCurrency = to.value;
+         let amt = amount.value;
+         fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`)
+         .then(response => {
+               return response.json();
+         })
+         .then(data => {
+            let rate = data.rates[toCurrency];
+            let total = rate * amt;
+            result.innerHTML = `${amt} ${fromCurrency} = ${total}
+            ${toCurrency}`;
+         });
+      });
+   </script>
 </body>
 </html>
